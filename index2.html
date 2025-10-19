@@ -3,9 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Code</title>
+    <title>{% block title %}College Admission System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <nav>
+        <div class="container">
+            <h1>College Admission System</h1>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('apply') }}">Apply</a></li>
+                <li><a href="{{ url_for('statistics') }}">Statistics</a></li>
+                <li><a href="{{ url_for('search') }}">Search Student</a></li>
+                <li><a href="{{ url_for('update') }}">Update Record</a></li>
+            </ul>
+        </div>
+    </nav>
     
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
+
+{% extends "base.html" %}
+
+{% block title %}Update Record - College Admission System{% endblock %}
+
+{% block content %}
+<h2>Update Student Record</h2>
+
+<form method="POST" class="update-form">
+    <div class="form-group">
+        <label for="field">What do you want to update?</label>
+        <select id="field" name="field" required>
+            <option value="Name">Name</option>
+            <option value="email">Email</option>
+            <option value="Phone">Phone</option>
+            <option value="Address">Address</option>
+            <option value="Gender">Gender</option>
+            <option value="Stream">Stream</option>
+            <option value="Dob">Date of Birth</option>
+            <option value="Age">Age</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="new_value">New Value:</label>
+        <input type="text" id="new_value" name="new_value" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="search_by">Search record by:</label>
+        <select id="search_by" name="search_by" required>
+            <option value="Email">Email</option>
+            <option value="Phone">Phone</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="search_value">Record's Email or Phone:</label>
+        <input type="text" id="search_value" name="search_value" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Update Data</button>
+</form>
+{% endblock %}
+
+{% extends "base.html" %}
+
+{% block title %}Home - College Admission System{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h2>Welcome to College Admission System</h2>
+    <p>Manage college admissions with ease. Apply, track, and update student records.</p>
+    
+    <div class="features">
+        <div class="feature-card">
+            <h3>Apply for Admission</h3>
+            <p>Submit your application and get instant admission status based on your percentage.</p>
+            <a href="{{ url_for('apply') }}" class="btn">Apply Now</a>
+        </div>
+        
+        <div class="feature-card">
+            <h3>View Statistics</h3>
+            <p>Check the number of admitted students in each stream.</p>
+            <a href="{{ url_for('statistics') }}" class="btn">View Stats</a>
+        </div>
+        
+        <div class="feature-card">
+            <h3>Search Student</h3>
+            <p>Find student records using their unique ID.</p>
+            <a href="{{ url_for('search') }}" class="btn">Search</a>
+        </div>
+        
+        <div class="feature-card">
+            <h3>Update Records</h3>
+            <p>Update student information by email or phone number.</p>
+            <a href="{{ url_for('update') }}" class="btn">Update</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% extends "base.html" %}
+
+{% block title %}Apply - College Admission System{% endblock %}
+
+{% block content %}
+<h2>College Admission Application</h2>
+<p>Fill out the form below to apply for admission. Minimum 75% is required for admission.</p>
+
+<form method="POST" class="admission-form">
+    <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="email">Email (Gmail only):</label>
+        <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="phone">Phone Number (10 digits):</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="stream">Stream:</label>
+        <select id="stream" name="stream" required>
+            <option value="Science">Science</option>
+            <option value="Commerce">Commerce</option>
+            <option value="Arts">Arts</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="dob">Date of Birth (YYYY-MM-DD):</label>
+        <input type="date" id="dob" name="dob" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="1" max="100" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="percentage">Percentage:</label>
+        <input type="number" id="percentage" name="percentage" step="0.01" min="0" max="100" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit Application</button>
+</form>
+{% endblock %}
+
+{% extends "base.html" %}
+
+{% block title %}Statistics - College Admission System{% endblock %}
+
+{% block content %}
+<h2>Admission Statistics by Stream</h2>
+
+<div class="stats-container">
+    <div class="stat-card">
+        <h3>Science Stream</h3>
+        <div class="stat-number">{{ science_count }}</div>
+        <p>admitted students</p>
+    </div>
+    
+    <div class="stat-card">
+        <h3>Arts Stream</h3>
+        <div class="stat-number">{{ arts_count }}</div>
+        <p>admitted students</p>
+    </div>
+    
+    <div class="stat-card">
+        <h3>Commerce Stream</h3>
+        <div class="stat-number">{{ commerce_count }}</div>
+        <p>admitted students</p>
+    </div>
+    
+    <div class="stat-card">
+        <h3>Total Admitted</h3>
+        <div class="stat-number">{{ science_count + arts_count + commerce_count }}</div>
+        <p>students</p>
+    </div>
+</div>
+{% endblock %}
+
+{% extends "base.html" %}
+
+{% block title %}Search Student - College Admission System{% endblock %}
+
+{% block content %}
+<h2>Search Student by Unique ID</h2>
+
+<form method="POST" class="search-form">
+    <div class="form-group">
+        <label for="unique_id">Student's Unique ID:</label>
+        <input type="text" id="unique_id" name="unique_id" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if student %}
+<div class="student-details">
+    <h3>Student Details</h3>
+    <table>
+        <tr>
+            <th>Name:</th>
+            <td>{{ student.name }}</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>{{ student.email }}</td>
+        </tr>
+        <tr>
+            <th>Phone:</th>
+            <td>{{ student.phone }}</td>
+        </tr>
+        <tr>
+            <th>Address:</th>
+            <td>{{ student.address }}</td>
+        </tr>
+        <tr>
+            <th>Gender:</th>
+            <td>{{ student.gender }}</td>
+        </tr>
+        <tr>
+            <th>Stream:</th>
+            <td>{{ student.stream }}</td>
+        </tr>
+        <tr>
+            <th>Date of Birth:</th>
+            <td>{{ student.dob }}</td>
+        </tr>
+        <tr>
+            <th>Age:</th>
+            <td>{{ student.age }}</td>
+        </tr>
+        <tr>
+            <th>Percentage:</th>
+            <td>{{ student.percentage }}%</td>
+        </tr>
+        <tr>
+            <th>Unique ID:</th>
+            <td>{{ student.unique_no }}</td>
+        </tr>
+    </table>
+</div>
+{% endif %}
+{% endblock %}
