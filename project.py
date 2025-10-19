@@ -13,8 +13,8 @@ from PIL import Image, ImageTk
 connection = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="reya@27",
-    database="college"
+    password="password",
+    database="junior_college"
 )
 
 
@@ -28,7 +28,7 @@ def save_to_mysql():
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='reya@27',
+            password='password',
             database='college'
         )
 
@@ -132,7 +132,7 @@ root.title("College Admission Interface!")
 frame = tk.Frame(root)
 frame.pack()
 
-image_path = "C:\\Users\\Shreya\\Downloads\\Untitled design.png"
+image_path = "Untitled design.png"
 original_image = Image.open(image_path)
 
 resized_image = original_image.resize((700,700))
@@ -231,7 +231,7 @@ def get_number_of_students():
         connection = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="reya@27",
+            password="password",
             database="college"
         )
 
@@ -264,7 +264,7 @@ def get_number_of_students():
 root = Tk()
 root.title("Number of students in each stream.")
 
-image_path = "C:\\Users\\Shreya\\Downloads\\Untitled design.png"
+image_path = "Untitled design.png"
 original_image = Image.open(image_path)
 
 resized_image = original_image.resize((700,700))
@@ -307,7 +307,7 @@ def search_data():
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='reya@27',
+            password='password',
             database='college'
         )
 
@@ -362,7 +362,7 @@ def display_data(rows, columns):
 root = tk.Tk()
 root.title("MySQL Search with Tkinter")
 
-image_path = "C:\\Users\\Shreya\\Downloads\\Untitled design.png"
+image_path = "Untitled design.png"
 original_image = Image.open(image_path)
 
 resized_image = original_image.resize((700,700))
@@ -419,7 +419,7 @@ def update_data():
             host='localhost',
             user='root',
 
-            password='reya@27',
+            password='password',
             database='college'
         )
 
@@ -458,7 +458,7 @@ def update_data():
 root = tk.Tk()
 root.title("MySQL Update with Tkinter")
 
-image_path = "C:\\Users\\Shreya\\Downloads\\Untitled design.png"
+image_path = "Untitled design.png"
 original_image = Image.open(image_path)
 
 resized_image = original_image.resize((700,700))
@@ -511,7 +511,7 @@ def search_data():
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='reya@27',
+            password='password',
             database='college'
         )
 
@@ -569,7 +569,7 @@ def display_data(rows, columns):
 root = tk.Tk()
 root.title("MySQL Search with Tkinter")
 
-image_path = "C:\\Users\\Shreya\\Downloads\\Untitled design.png"
+image_path = "Untitled design.png"
 original_image = Image.open(image_path)
 
 resized_image = original_image.resize((700,700))
